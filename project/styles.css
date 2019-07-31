@@ -10,63 +10,217 @@ body {
     padding: 0;
     align-items: center;
     justify-content: center;
-    // perspective: 400px;
+    background: #000000;
+
+    &__content {
+        height: 540px;
+        width: 280px;
+        position: relative;
+    }
 }
+
 @keyframes rotation {
     0% {
-        transform: rotateZ(0deg) rotateX(-10deg) rotateY(0deg)
+        transform: rotateZ(0deg) rotateX(-15deg) rotateY(0deg)
     }
     100% {
-        transform: rotateZ(0deg) rotateX(-10deg) rotateY(-360deg)
+        transform: rotateZ(0deg) rotateX(-15deg) rotateY(-360deg)
+    }
+}
+
+@keyframes color-front {
+    0%, 100%  {
+       opacity: 1;
+    }
+    25%, 75% {
+        opacity: 0;
+    }
+}
+@keyframes color-back {
+    0%, 100%, 25%, 75%  {
+       opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes color-right {
+    0%, 50%  {
+       opacity: 0.25;
+    }
+    50%  {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+}
+
+@keyframes color-left {
+    0%, 50%, 100%  {
+       opacity: 0;
+    }
+    75% {
+        opacity: 1;
     }
 }
 
 .cube {
     --z-angle: 100px;
-    --color: rgba(14,239,232,0.3);
-    --rotation-time: 12s;
-
-    width: 200px;
-    height: 200px;
+    --color: rgba(0, 248,204,1);
+    --time: 5s;
+   
+    width: 203px;
+    height: 203px;
     position: relative;
     transform-style: preserve-3d;
     transform-origin: center center; 
     transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg);
-    animation: rotation var(--rotation-time) infinite;
-    animation-timing-function: linear;
+    animation: rotation var(--time) infinite linear;
 
     &__side {
         position: absolute;
-        width: 200px;
-        height: 200px;
-        background: var(--color);
-        border: 1px solid black;
+        width: 203px;
+        height: 203px;
+        opacity: 0;
+
+        &:after{
+            content: '';
+            left: 0;
+            top: 0; 
+            width: 3px;
+            height: 3px;
+            background: var(--color);
+            position: absolute;
+            border-radius: 100%;
+            box-shadow: 
+                0px 40px 0px 0px var(--color), 
+                0px 80px 0px 0px var(--color), 
+                0px 120px 0px 0px var(--color), 
+                0px 160px 0px 0px var(--color),
+                0px 200px 0px 0px var(--color),
+
+                40px 0px 0px 0px var(--color), 
+                80px 0px 0px 0px var(--color), 
+                120px 0px 0px 0px var(--color), 
+                160px 0px 0px 0px var(--color), 
+                200px 0px 0px 0px var(--color),
+
+                40px 40px 0px 0px var(--color), 
+                80px 40px 0px 0px var(--color), 
+                120px 40px 0px 0px var(--color), 
+                160px 40px 0px 0px var(--color), 
+                200px 40px 0px 0px var(--color),
+
+                40px 80px 0px 0px var(--color), 
+                80px 80px 0px 0px var(--color), 
+                120px 80px 0px 0px var(--color), 
+                160px 80px 0px 0px var(--color), 
+                200px 80px 0px 0px var(--color),
+
+                40px 120px 0px 0px var(--color), 
+                80px 120px 0px 0px var(--color), 
+                120px 120px 0px 0px var(--color), 
+                160px 120px 0px 0px var(--color), 
+                200px 120px 0px 0px var(--color),
+
+                40px 160px 0px 0px var(--color), 
+                80px 160px 0px 0px var(--color), 
+                120px 160px 0px 0px var(--color), 
+                160px 160px 0px 0px var(--color), 
+                200px 160px 0px 0px var(--color),
+
+                40px 200px 0px 0px var(--color), 
+                80px 200px 0px 0px var(--color), 
+                120px 200px 0px 0px var(--color), 
+                160px 200px 0px 0px var(--color), 
+                200px 200px 0px 0px var(--color);
+        }
 
         &--front {
-           
-            transform: rotateY(0deg)  translateZ(var(--z-angle)); 
+            animation: color-front var(--time) infinite linear;
+            transform: rotateY(0deg) translateZ(var(--z-angle)); 
         }
         &--right {
-           
-            animation-delay: 6s;
-            transform: rotateY(90deg)  translateZ(var(--z-angle)); 
+            transform: rotateY(90deg) translateZ(var(--z-angle)); 
+            animation: color-right var(--time) infinite linear;
         }
         &--back {
-           
-            animation-delay: 4s;
             transform: rotateY(180deg)  translateZ(var(--z-angle)); 
+            animation: color-back var(--time) infinite linear;
         }
         &--left {
-           
-            animation-delay: 2s;
             transform: rotateY(-90deg)  translateZ(var(--z-angle)); 
+            animation: color-left var(--time) infinite linear;
         }
         &--top {
-            transform: rotateX(90deg)  translateZ(var(--z-angle)); 
+            opacity: 1;
+            transform: rotateX(90deg) translateZ(var(--z-angle)); 
         }
         &--bottom {
-            transform: rotateX(-90deg)  translateZ(var(--z-angle)); 
+            opacity: 0;
         }
     }
-    
+}
+.shadow {
+    position: absolute;
+    top: 258px;
+    filter: blur(2px);
+
+    .cube {
+
+        &__side {
+         
+            &--top {
+                --color: red
+            }
+       
+        &:after {
+            background: red;
+            box-shadow: 
+            0px 40px 0px 0px var(--color),
+            0px 80px 0px 0px var(--color), 
+            0px 120px 0px 0px var(--color), 
+            0px 160px 0px 0px var(--color),
+            0px 200px 0px 0px var(--color),
+
+            40px 0px 0px 0px red, 
+            80px 0px 0px 0px var(--color), 
+            120px 0px 0px 0px var(--color), 
+            160px 0px 0px 0px var(--color), 
+            200px 0px 0px 0px var(--color),
+
+            40px 40px 0px 0px red, 
+            80px 40px 0px 0px var(--color), 
+            120px 40px 0px 0px var(--color), 
+            160px 40px 0px 0px var(--color), 
+            200px 40px 0px 0px var(--color),
+
+            40px 80px 0px 0px red, 
+            80px 80px 0px 0px var(--color), 
+            120px 80px 0px 0px var(--color), 
+            160px 80px 0px 0px var(--color), 
+            200px 80px 0px 0px var(--color),
+
+            40px 120px 0px 0px var(--color), 
+            80px 120px 0px 0px var(--color), 
+            120px 120px 0px 0px var(--color), 
+            160px 120px 0px 0px var(--color), 
+            200px 120px 0px 0px var(--color),
+
+            40px 160px 0px 0px var(--color), 
+            80px 160px 0px 0px var(--color), 
+            120px 160px 0px 0px var(--color), 
+            160px 160px 0px 0px var(--color), 
+            200px 160px 0px 0px var(--color),
+
+            40px 200px 0px 0px var(--color), 
+            80px 200px 0px 0px var(--color), 
+            120px 200px 0px 0px var(--color), 
+            160px 200px 0px 0px var(--color), 
+            200px 200px 0px 0px var(--color);
+        }
+    }
+}
 }
