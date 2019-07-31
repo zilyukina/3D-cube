@@ -68,7 +68,7 @@ body {
 
 .cube {
     --z-angle: 100px;
-    --color: rgba(0, 248,204,1);
+    --color: #06FFFF;
     --time: 5s;
    
     width: 203px;
@@ -166,61 +166,11 @@ body {
 .shadow {
     position: absolute;
     top: 258px;
-    filter: blur(2px);
+    filter: blur(1px);
 
     .cube {
-
-        &__side {
-         
-            &--top {
-                --color: red
-            }
-       
-        &:after {
-            background: red;
-            box-shadow: 
-            0px 40px 0px 0px var(--color),
-            0px 80px 0px 0px var(--color), 
-            0px 120px 0px 0px var(--color), 
-            0px 160px 0px 0px var(--color),
-            0px 200px 0px 0px var(--color),
-
-            40px 0px 0px 0px red, 
-            80px 0px 0px 0px var(--color), 
-            120px 0px 0px 0px var(--color), 
-            160px 0px 0px 0px var(--color), 
-            200px 0px 0px 0px var(--color),
-
-            40px 40px 0px 0px red, 
-            80px 40px 0px 0px var(--color), 
-            120px 40px 0px 0px var(--color), 
-            160px 40px 0px 0px var(--color), 
-            200px 40px 0px 0px var(--color),
-
-            40px 80px 0px 0px red, 
-            80px 80px 0px 0px var(--color), 
-            120px 80px 0px 0px var(--color), 
-            160px 80px 0px 0px var(--color), 
-            200px 80px 0px 0px var(--color),
-
-            40px 120px 0px 0px var(--color), 
-            80px 120px 0px 0px var(--color), 
-            120px 120px 0px 0px var(--color), 
-            160px 120px 0px 0px var(--color), 
-            200px 120px 0px 0px var(--color),
-
-            40px 160px 0px 0px var(--color), 
-            80px 160px 0px 0px var(--color), 
-            120px 160px 0px 0px var(--color), 
-            160px 160px 0px 0px var(--color), 
-            200px 160px 0px 0px var(--color),
-
-            40px 200px 0px 0px var(--color), 
-            80px 200px 0px 0px var(--color), 
-            120px 200px 0px 0px var(--color), 
-            160px 200px 0px 0px var(--color), 
-            200px 200px 0px 0px var(--color);
+        &__side:not(.cube__side--top) {
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.9) , rgba(0, 0, 0, 0) 80%);
         }
     }
-}
 }
